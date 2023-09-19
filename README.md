@@ -1,3 +1,3 @@
 # apollo-server-demo
 
-A demo is developed by Apollo Server v3 for practice
+A demo is developed with Apollo Server v3 for practice
