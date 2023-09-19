@@ -29,3 +29,12 @@ const resolvers = {
     books: () => books,
   },
 };
+
+const apolloServer = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
+
+apolloServer.listen().then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
+});
