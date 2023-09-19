@@ -8,6 +8,7 @@
   },
   "author": "",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
     "apollo-server": "^3.12.1",
     "graphql": "^16.8.1"
