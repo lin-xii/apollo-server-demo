@@ -1,4 +1,9 @@
-import { ApolloServer, gql } from "apollo-server";
+import express from "express";
+import http from "http";
+import { ApolloServer, gql } from "apollo-server-express";
+
+const app = express();
+const httpServer = http.createServer(app);
 
 // schema, 本质是一堆类型的定义
 // typeDefs, 本质是一堆类型的定义、组成的字符串。其实就是schema的字符串形式
@@ -34,7 +39,11 @@ const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
 });
+await apolloServer.start();
+apolloServer.applyMiddleware({ app, path: "/" });
 
-apolloServer.listen().then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
+httpServer.listen({ port: 4000 }, () => {
+  console.log(
+    `🚀 Server ready at http://localhost:4000${apolloServer.graphqlPath}`
+  );
 });
