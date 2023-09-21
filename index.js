@@ -15,6 +15,12 @@ const typeDefs = gql`
   }
   type Query {
     books: [Book]
+    favoriteColor: AllowedColor
+  }
+  enum AllowedColor {
+    RED
+    GREEN
+    BLUE
   }
 `;
 
@@ -30,8 +36,15 @@ const books = [
 ];
 
 const resolvers = {
+  // AllowedColor: {
+  //   RED: "#f00",
+  //   GREEN: "#0f0",
+  //   BLUE: "#00f",
+  // },
   Query: {
     books: () => books,
+    favoriteColor: () => "RED",
+    // favoriteColor: () => "#00f",
   },
 };
 
