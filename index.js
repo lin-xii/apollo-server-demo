@@ -17,16 +17,26 @@ const typeDefs = gql`
     books: [Book]
     favoriteColor: AllowedColor
     commonVulnType: VulnType
+    colors: AllColor
   }
   enum AllowedColor {
     RED
     GREEN
     BLUE
   }
+  type EnabledColor {
+    hex: String
+    enabled: Boolean
+  }
+  type DisabledColor {
+    hex: String
+    disabled: Boolean
+  }
   enum VulnType {
     IP
     WEB
   }
+  union AllColor = EnabledColor | DisabledColor
 `;
 
 const books = [
@@ -46,6 +56,17 @@ const resolvers = {
     GREEN: "#0f0",
     BLUE: "#00f",
   },
+  AllColor: {
+    __resolveType(obj, context, info) {
+      if (obj.enabled) {
+        return "EnabledColor";
+      }
+      if (obj.disabled) {
+        return "DisabledColor";
+      }
+      return null;
+    },
+  },
   // 完全不需要搞parse、format。。弄个object来回的转换，还得写俩函数。。。。
   VulnType: {
     IP: 1,
@@ -55,6 +76,9 @@ const resolvers = {
     books: () => books,
     favoriteColor: () => "#00f",
     commonVulnType: () => 2,
+    colors: () => {
+      return { hex: "#f00", enabled: true };
+    },
   },
 };
 
