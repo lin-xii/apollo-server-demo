@@ -36,15 +36,14 @@ const books = [
 ];
 
 const resolvers = {
-  // AllowedColor: {
-  //   RED: "#f00",
-  //   GREEN: "#0f0",
-  //   BLUE: "#00f",
-  // },
+  AllowedColor: {
+    RED: "#f00",
+    GREEN: "#0f0",
+    BLUE: "#00f",
+  },
   Query: {
     books: () => books,
-    favoriteColor: () => "RED",
-    // favoriteColor: () => "#00f",
+    favoriteColor: () => "#00f",
   },
 };
 
