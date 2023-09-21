@@ -46,10 +46,14 @@ const resolvers = {
     GREEN: "#0f0",
     BLUE: "#00f",
   },
+  VulnType: {
+    IP: 1,
+    WEB: 2,
+  },
   Query: {
     books: () => books,
     favoriteColor: () => "#00f",
-    commonVulnType: () => "IP",
+    commonVulnType: () => 2,
   },
 };
 
