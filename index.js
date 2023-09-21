@@ -17,18 +17,18 @@ const typeDefs = gql`
     books: [Book]
     favoriteColor: AllowedColor
     commonVulnType: VulnType
-    colors: AllColor
+    colors: ColorHex
   }
   enum AllowedColor {
     RED
     GREEN
     BLUE
   }
-  type EnabledColor {
+  type EnabledColor implements ColorHex {
     hex: String
     enabled: Boolean
   }
-  type DisabledColor {
+  type DisabledColor implements ColorHex {
     hex: String
     disabled: Boolean
   }
@@ -37,6 +37,9 @@ const typeDefs = gql`
     WEB
   }
   union AllColor = EnabledColor | DisabledColor
+  interface ColorHex {
+    hex: String
+  }
 `;
 
 const books = [
@@ -67,6 +70,17 @@ const resolvers = {
       return null;
     },
   },
+  ColorHex: {
+    __resolveType(obj, context, info) {
+      if (obj.enabled) {
+        return "EnabledColor";
+      }
+      if (obj.disabled) {
+        return "DisabledColor";
+      }
+      return null;
+    },
+  },
   // 完全不需要搞parse、format。。弄个object来回的转换，还得写俩函数。。。。
   VulnType: {
     IP: 1,
@@ -77,7 +91,7 @@ const resolvers = {
     favoriteColor: () => "#00f",
     commonVulnType: () => 2,
     colors: () => {
-      return { hex: "#f00", enabled: true };
+      return { hex: "#f00", disabled: true };
     },
   },
 };
