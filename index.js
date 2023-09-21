@@ -46,6 +46,7 @@ const resolvers = {
     GREEN: "#0f0",
     BLUE: "#00f",
   },
+  // 完全不需要搞parse、format。。弄个object来回的转换，还得写俩函数。。。。
   VulnType: {
     IP: 1,
     WEB: 2,
