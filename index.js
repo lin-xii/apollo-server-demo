@@ -16,11 +16,16 @@ const typeDefs = gql`
   type Query {
     books: [Book]
     favoriteColor: AllowedColor
+    commonVulnType: VulnType
   }
   enum AllowedColor {
     RED
     GREEN
     BLUE
+  }
+  enum VulnType {
+    IP
+    WEB
   }
 `;
 
@@ -44,6 +49,7 @@ const resolvers = {
   Query: {
     books: () => books,
     favoriteColor: () => "#00f",
+    commonVulnType: () => "IP",
   },
 };
 
