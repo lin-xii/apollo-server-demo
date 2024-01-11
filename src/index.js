@@ -7,6 +7,7 @@ import { ApolloServerPluginInlineTrace } from "@apollo/server/plugin/inlineTrace
 import typeDefs from "./schemas/index.js";
 import resolvers from "./resolvers/index.js";
 import responseCachePlugin from "@apollo/server-plugin-response-cache";
+import { ApolloServerPluginCacheControl } from "@apollo/server/plugin/cacheControl";
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -21,6 +22,9 @@ const apolloServer = new ApolloServer({
       },
     }),
     responseCachePlugin(),
+    // ApolloServerPluginCacheControl({
+    //   defaultMaxAge: 5,
+    // }),
   ],
 });
 await apolloServer.start();
