@@ -1,0 +1,10 @@
+enum AllowedColor {
+  RED
+  GREEN
+  BLUE
+}
+
+enum VulnType {
+  IP
+  WEB
+}
