@@ -1,5 +1,8 @@
 import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
+import { expressMiddleware } from "@apollo/server/express4";
+import cors from "cors";
+import http from "http";
+import express from "express";
 
 // schema, 本质是一堆类型的定义
 // typeDefs, 本质是一堆类型的定义、组成的字符串。其实就是schema的字符串形式
@@ -92,12 +95,16 @@ const resolvers = {
   },
 };
 
+const app = express();
+const httpServer = http.createServer(app);
+
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
 });
+await apolloServer.start();
 
-const { url } = await startStandaloneServer(apolloServer, {
-  listen: { port: 4000 },
-});
-console.log(`🚀  Server ready at: ${url}`);
+app.use("/", cors(), express.json(), expressMiddleware(apolloServer));
+
+await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
+console.log(`🚀 Server ready at http://localhost:4000`);
