@@ -1,5 +1,5 @@
 type Query {
-  books: [Book]
+  books: [Book] @cacheControl(maxAge: 10)
   favoriteColor: AllowedColor
   commonVulnType: VulnType
   colors: ColorHex

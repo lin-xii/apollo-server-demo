@@ -34,7 +34,10 @@ const resolvers = {
     WEB: 2,
   },
   Query: {
-    books: () => books,
+    books: () => {
+      console.log("books");
+      return books;
+    },
     favoriteColor: () => "#00f",
     commonVulnType: () => 2,
     colors: () => {
