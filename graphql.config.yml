@@ -1,0 +1,7 @@
+# graphql.config.yml //in root directory
+# 使用URL的方式, 只有语法提示, 没有定义跳转
+# schema: http://localhost:5910/graphql
+schema:
+  - ./src/schemas/*.gql
+  - ./src/schemas/**/*.gql
+  - ./src/schemas/**/**/*.gql
