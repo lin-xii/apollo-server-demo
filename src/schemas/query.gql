@@ -1,0 +1,31 @@
+type Book {
+  title: String
+  author: String
+}
+type Query {
+  books: [Book]
+  favoriteColor: AllowedColor
+  commonVulnType: VulnType
+  colors: ColorHex
+}
+enum AllowedColor {
+  RED
+  GREEN
+  BLUE
+}
+type EnabledColor implements ColorHex {
+  hex: String
+  enabled: Boolean
+}
+type DisabledColor implements ColorHex {
+  hex: String
+  disabled: Boolean
+}
+enum VulnType {
+  IP
+  WEB
+}
+union AllColor = EnabledColor | DisabledColor
+interface ColorHex {
+  hex: String
+}
