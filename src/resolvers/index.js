@@ -1,3 +1,5 @@
+import { books } from "../localStorage.js";
+
 const resolvers = {
   AllowedColor: {
     RED: "#f00",
@@ -40,16 +42,5 @@ const resolvers = {
     },
   },
 };
-
-const books = [
-  {
-    title: "The Awakening",
-    author: "Kate Chopin",
-  },
-  {
-    title: "City of Glass",
-    author: "Paul Auster",
-  },
-];
 
 export default resolvers;
