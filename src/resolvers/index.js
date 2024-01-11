@@ -57,7 +57,8 @@ const resolvers = {
       console.log("books");
       return books;
     },
-    library: (_, args, context, { cacheControl }) => {
+    library: (_, { country }, context, { cacheControl }) => {
+      console.log(country);
       // console.log(info.cacheControl);
       console.log("library", cacheControl.cacheHint.maxAge);
       return [{}];
