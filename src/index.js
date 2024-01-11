@@ -6,6 +6,7 @@ import express from "express";
 import { ApolloServerPluginInlineTrace } from "@apollo/server/plugin/inlineTrace";
 import typeDefs from "./schemas/index.js";
 import resolvers from "./resolvers/index.js";
+import responseCachePlugin from "@apollo/server-plugin-response-cache";
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -19,6 +20,7 @@ const apolloServer = new ApolloServer({
         unmodified: true,
       },
     }),
+    responseCachePlugin(),
   ],
 });
 await apolloServer.start();
