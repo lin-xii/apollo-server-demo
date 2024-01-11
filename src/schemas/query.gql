@@ -1,5 +1,6 @@
 type Query {
-  books: [Book] @cacheControl(maxAge: 10)
+  books: [Book]
+  library: [Library]
   favoriteColor: AllowedColor
   commonVulnType: VulnType
   colors: ColorHex
@@ -8,6 +9,13 @@ type Query {
 type Book {
   title: String
   author: String
+}
+
+# type-level的maxAge，field自动继承
+# Query.field-level的maxAge，field 不 继承。所以需要显式声明所有字段
+type Library @cacheControl(maxAge: 5) {
+  name: String #@cacheControl(inheritMaxAge: true)
+  books: [Book] @cacheControl(maxAge: 3)
 }
 
 type EnabledColor implements ColorHex {
