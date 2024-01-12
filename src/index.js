@@ -8,6 +8,10 @@ import typeDefs from "./schemas/index.js";
 import resolvers from "./resolvers/index.js";
 import responseCachePlugin from "@apollo/server-plugin-response-cache";
 import { ApolloServerPluginCacheControl } from "@apollo/server/plugin/cacheControl";
+import {
+  requestLifeCycle,
+  serverLifeCycle,
+} from "./plugins/lifecycle-plugin.js";
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -16,15 +20,22 @@ const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   plugins: [
+    {
+      async serverWillStart() {
+        console.log("Server starting up: serverWillStart");
+      },
+    },
     ApolloServerPluginInlineTrace({
       includeErrors: {
         unmodified: true,
       },
     }),
     responseCachePlugin(),
-    // ApolloServerPluginCacheControl({
-    //   defaultMaxAge: 5,
-    // }),
+    ApolloServerPluginCacheControl({
+      defaultMaxAge: 5,
+    }),
+    serverLifeCycle(),
+    requestLifeCycle(),
   ],
 });
 await apolloServer.start();

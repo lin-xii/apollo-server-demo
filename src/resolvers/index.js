@@ -38,12 +38,12 @@ const resolvers = {
       // cacheControl.setCacheHint({ maxAge: 5 });
       // console.log(parent);
       // console.log(info.cacheControl);
-      console.log("Library.name", cacheControl.cacheHint.maxAge);
+      // console.log("Library.name", cacheControl.cacheHint.maxAge);
       return generateRandomBookTitle();
     },
     books: (parent, args, context, { cacheControl }) => {
       // console.log(info.cacheControl);
-      console.log("Library.books", cacheControl.cacheHint.maxAge);
+      // console.log("Library.books", cacheControl.cacheHint.maxAge);
       return [
         {
           title: generateRandomBookTitle(),
@@ -54,13 +54,13 @@ const resolvers = {
   },
   Query: {
     books: () => {
-      console.log("books");
+      // console.log("books");
       return books;
     },
     library: (_, { country }, context, { cacheControl }) => {
-      console.log(country);
+      // console.log(country);
       // console.log(info.cacheControl);
-      console.log("library", cacheControl.cacheHint.maxAge);
+      // console.log("library", cacheControl);
       return [{}];
       return [
         {
